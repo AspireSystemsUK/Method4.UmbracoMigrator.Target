@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using System;
+using Method4.UmbracoMigrator.Target.Core.Models.MigrationModels;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Web.BackOffice.Controllers;
 using static Umbraco.Cms.Core.Constants.Conventions;
@@ -86,17 +87,54 @@ namespace Method4.UmbracoMigrator.Target.Core.Controllers.Api
                 settings.PhaseThreeEnabled,
                 settings.PhaseFourEnabled);
 
-            _migratorFileService.UnzipSnapshotFile(settings.ChosenSnapshotName!);
-            var contentNodes = _migratorFileService.LoadContentXml();
-            var mediaNodes = _migratorFileService.LoadMediaXml();
+            // Load the XML Files
+            List<MigrationContent> contentNodes;
+            List<MigrationMedia> mediaNodes;
 
+            try
+            {
+                _hubService.SendMessage(0, "Unzipping snapshot");
+                _migratorFileService.UnzipSnapshotFile(settings.ChosenSnapshotName!);
+            }
+            catch (Exception ex)
+            {
+                _hubService.SendMessage(-1, "Failed to unzip snapshot, view log for more details.");
+                _logger.LogError(ex, "Failed to unzip snapshot");
+                throw new MigrationFailedException(0, ex);
+            }
+
+            try
+            {
+                _hubService.SendMessage(0, "Loading Content XML");
+                contentNodes = _migratorFileService.LoadContentXml();
+            }
+            catch (Exception ex)
+            {
+                _hubService.SendMessage(-1, "Failed to load Content XML, view log for more details.");
+                _logger.LogError(ex, "Failed to load Content XML");
+                throw new MigrationFailedException(0, ex);
+            }
+
+            try
+            {
+                _hubService.SendMessage(0, "Loading Media XML");
+                mediaNodes = _migratorFileService.LoadMediaXml();
+            }
+            catch (Exception ex)
+            {
+                _hubService.SendMessage(-1, "Failed to load Media XML, view log for more details.");
+                _logger.LogError(ex, "Failed to load Media XML");
+                throw new MigrationFailedException(0, ex);
+            }
+
+            // Pre-import tasks
             if (settings.CleanImport)
             {
-                _hubService.SendMessage(-1, "Cleaning site before import - Started");
+                _hubService.SendMessage(0, "Cleaning site before import - Started");
                 _logger.LogInformation("Cleaning site before import - Started");
                 CleanBeforeImport();
                 _relationLookupService.DeleteAllRelations();
-                _hubService.SendMessage(-1, "Cleaning site before import  - Complete");
+                _hubService.SendMessage(0, "Cleaning site before import  - Complete");
                 _logger.LogInformation("Cleaning site before import  - Complete");
             }
 
