@@ -61,6 +61,12 @@ namespace Method4.UmbracoMigrator.Target.Core.Mappers
             newNode.CreateDate = oldNode.CreateDate;
             newNode.UpdateDate = DateTime.Now;
 
+            // Set the default template ID if it is missing
+            if (newNode.TemplateId == null && contentType?.DefaultTemplate?.Id != null)
+            {
+                newNode.TemplateId = contentType.DefaultTemplateId;
+            }
+
             // Map properties that have the same aliases
             foreach (var oldProperty in oldNode.Properties)
             {
