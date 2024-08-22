@@ -163,6 +163,7 @@ namespace Method4.UmbracoMigrator.Target.Core.Helpers
                 var isNode = oldPickedUrl.TryGetValue("udi", out var oldUdi);
                 var hasName = oldPickedUrl.TryGetValue("name", out var oldName);
                 var hasTarget = oldPickedUrl.TryGetValue("target", out var oldtarget);
+                var hasQueryString = oldPickedUrl.TryGetValue("queryString", out var oldQueryString);
 
                 if (oldUdi == null || isNode == false)
                 {
@@ -203,6 +204,7 @@ namespace Method4.UmbracoMigrator.Target.Core.Helpers
                     udi = isMedia
                         ? $"umb://media/{newKey!.ToString()!.Replace("-", "")}"
                         : $"umb://document/{newKey!.ToString()!.Replace("-", "")}",
+                    queryString = hasQueryString ? oldQueryString : ""
                 });
             }
 
