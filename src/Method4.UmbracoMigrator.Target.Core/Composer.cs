@@ -9,6 +9,7 @@ using Method4.UmbracoMigrator.Target.Core.MigrationSteps;
 using Method4.UmbracoMigrator.Target.Core.MigrationSteps.Tasks;
 using Method4.UmbracoMigrator.Target.Core.Models.DataModels;
 using Method4.UmbracoMigrator.Target.Core.Options;
+using Method4.UmbracoMigrator.Target.Core.Repositories;
 using Method4.UmbracoMigrator.Target.Core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,6 +37,10 @@ public class Composer : IComposer
         builder.Services.AddTransient<IPreviewFactory, PreviewFactory>();
         builder.Services.AddTransient<IMigrationContentFactory, MigrationContentFactory>();
         builder.Services.AddTransient<IMigrationMediaFactory, MigrationMediaFactory>();
+
+        // Repositories
+        builder.Services.AddTransient<MigrationLookupsRepository>();
+        builder.Services.AddTransient<MigrationLookupsRepositoryWithCache>();
 
         // Services
         builder.Services.AddTransient<IMigratorBlobService, MigratorBlobService>();
