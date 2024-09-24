@@ -135,13 +135,14 @@ This service is for interacting with the `MigrationLookups` database table, this
 - _NodeRelation? **GetRelationByOldKey**(string oldKey)_
 - _NodeRelation? **GetRelationByNewKey**(Guid newKey)_
 - _NodeRelation? **GetRelationByNewKey**(string newKey)_
-     - Returns a NodeRelation onject that contains the old and new IDs and Keys for a migrated node
-
+     - Returns a NodeRelation object that contains the old and new IDs and Keys for a migrated node
 - _void **StoreNewRelation**(string newId, string oldId, Guid newKey, Guid oldKey)_
 - _void **StoreNewRelation**(string newId, string oldId, string newKey, string oldKey)_
-
+     - Stores a new NodeRelation record in the `MigrationLookups` table
 - _int **CountRelations**()_
+     - Returns the number of NodeRelations in the `MigrationLookups` table
 - _void **DeleteAllRelations**()_
+     - Deletes all NodeRelation records from the `MigrationLookups` table
 
 ## 🖼️ What about my Media Files?
 On the [Method4.UmbracoMigrator.Source](https://github.com/Method4Ltd/Method4.UmbracoMigrator.Source) package, you can choose to include the physical media files in the migration snapshot, these would then be uploaded to your site's media folder (or Azure blob storage if configured) during a migration import.
