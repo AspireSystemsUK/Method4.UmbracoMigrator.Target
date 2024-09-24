@@ -129,9 +129,19 @@ This class can convert certain old PropertyEditor values into their new counterp
 This service is for interacting with the `MigrationLookups` database table, this table contains information that maps old ID's and old Keys to their corresponding new ID's and Keys; this enables subsequent migration imports to update the already migrated nodes, and allows the updating of old node references in properties like the content picker etc...
 
 ### Methods:
-- _Guid? **GetNewKey**(string oldKey)_
-- _Guid? **GetNewKey**(Guid oldKey)_
-     - Returns the new GUID Key for the given old Key
+- _NodeRelation? **GetRelationByOldId**(string oldId)_
+- _NodeRelation? **GetRelationByNewId**(string newId)_
+- _NodeRelation? **GetRelationByOldKey**(Guid oldKey)_
+- _NodeRelation? **GetRelationByOldKey**(string oldKey)_
+- _NodeRelation? **GetRelationByNewKey**(Guid newKey)_
+- _NodeRelation? **GetRelationByNewKey**(string newKey)_
+     - Returns a NodeRelation onject that contains the old and new IDs and Keys for a migrated node
+
+- _void **StoreNewRelation**(string newId, string oldId, Guid newKey, Guid oldKey)_
+- _void **StoreNewRelation**(string newId, string oldId, string newKey, string oldKey)_
+
+- _int **CountRelations**()_
+- _void **DeleteAllRelations**()_
 
 ## 🖼️ What about my Media Files?
 On the [Method4.UmbracoMigrator.Source](https://github.com/Method4Ltd/Method4.UmbracoMigrator.Source) package, you can choose to include the physical media files in the migration snapshot, these would then be uploaded to your site's media folder (or Azure blob storage if configured) during a migration import.
