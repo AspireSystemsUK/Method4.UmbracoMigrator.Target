@@ -125,8 +125,8 @@ This class can convert certain old PropertyEditor values into their new counterp
 - _bool **TryConvertMediaPickerValueToMediaPicker3Value**(string mediaPickerValue, out string mediaPicker3Value)_
 - _string **ConvertMediaPickerValueToMediaPicker3Value**(string mediaPickerValue)_
 
-## 🚀 IKeyLookupService - `Method4.UmbracoMigrator.Target.Core.Services`
-This service is for interacting with the MigrationKeyLookups database table, this table holds a simple KeyValue list of old Guid Keys and their corresponding new Guid Keys.
+## 🚀 IRelationLookupService - `Method4.UmbracoMigrator.Target.Core.Services`
+This service is for interacting with the `MigrationLookups` database table, this table contains information that maps old ID's and old Keys to their corresponding new ID's and Keys; this enables subsequent migration imports to update the already migrated nodes, and allows the updating of old node references in properties like the content picker etc...
 
 ### Methods:
 - _Guid? **GetNewKey**(string oldKey)_
