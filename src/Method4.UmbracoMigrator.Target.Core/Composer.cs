@@ -76,7 +76,10 @@ public class Composer : IComposer
         builder.Services.AddMigratorSignalR();
 
         // Media Path Schemes
-        builder.Services.AddUnique<IMediaPathScheme, MigratedUrlRedirectMediaPathScheme>();
+        if (options.GetSection("EnableMediaRedirectGeneration").Value != null)
+        {
+            if (bool.Parse(options.GetSection("EnableMediaRedirectGeneration").Value)) builder.Services.AddUnique<IMediaPathScheme, MigratedUrlRedirectMediaPathScheme>();
+        }
     }
 
     private static void LoadCustomDocTypeMappings(IUmbracoBuilder builder)
