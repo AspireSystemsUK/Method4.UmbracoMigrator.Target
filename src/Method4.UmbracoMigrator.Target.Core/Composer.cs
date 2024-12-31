@@ -23,15 +23,16 @@ using Umbraco.Extensions;
 namespace Method4.UmbracoMigrator.Target.Core;
 public class Composer : IComposer
 {
-
     public void Compose(IUmbracoBuilder builder)
     {
-        // App Settings
-        var options = builder.Config
+        // Add our Options
+        var targetSection = builder.Config
             .GetSection("Method4")
             .GetSection("UmbracoMigrator")
             .GetSection("Target");
-        builder.Services.Configure<MigratorTargetSettings>(options);
+
+        builder.Services.AddOptions<MigratorTargetSettings>()
+            .Bind(targetSection);
 
         // Factories
         builder.Services.AddTransient<IPreviewFactory, PreviewFactory>();
@@ -80,8 +81,11 @@ public class Composer : IComposer
         builder.Services.AddSignalR();
         builder.Services.AddMigratorSignalR();
 
-        // Media Path Schemes
-        builder.Services.AddUnique<IMediaPathScheme, MigratedUrlRedirectMediaPathScheme>();
+        // Register Media Path Schemes
+        if (bool.TryParse(targetSection.GetSection(nameof(MigratorTargetSettings.EnableMediaRedirectGeneration)).Value, out var enableMediaRedirectGeneration) && enableMediaRedirectGeneration)
+        {
+            builder.Services.AddUnique<IMediaPathScheme, MigratedUrlRedirectMediaPathScheme>();
+        }
     }
 
     private static void LoadCustomDocTypeMappings(IUmbracoBuilder builder)
