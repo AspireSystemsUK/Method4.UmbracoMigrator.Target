@@ -13,10 +13,10 @@ This tool was originally created as an internal tool for us at Method4, to make 
 
 The migrator tool consists of 2 packages:
 
-### 📤 [Method4.UmbracoMigrator.Source](https://github.com/Method4Ltd/Method4.UmbracoMigrator.Source)
+### 📤 [Method4.UmbracoMigrator.Source](https://github.com/AspireSystemsUK/Method4.UmbracoMigrator.Source)
 Generates the Migration Snapshot .zip files that will be imported into your shiny new 10+ site!
 
-### 📥 [Method4.UmbracoMigrator.Target](https://github.com/Method4Ltd/Method4.UmbracoMigrator.Target)
+### 📥 [Method4.UmbracoMigrator.Target](https://github.com/AspireSystemsUK/Method4.UmbracoMigrator.Target)
 Imports the migration snapshots and runs mappers to transform the data.
 
 The Target package ships with built-in default mappers that perform "lazy" mappings, e.g. if an old Node's DocType matches one of our new DocTypes it will attempt to map it, and if any of its properties have identical aliases, then their raw values be copied across.
@@ -79,7 +79,7 @@ dotnet add package Method4.UmbracoMigrator.Target
 Documentation can be found in the `/docs` folder, and there are examples of custom mappers in the `/custom_mapper_examples` folder.
 
 ### How do I create a migration snapshot?
-You will need to install the [Method4.UmbracoMigrator.Source](https://github.com/Method4Ltd/Method4.UmbracoMigrator.Source) package onto your source website, to generate the snapshots.
+You will need to install the [Method4.UmbracoMigrator.Source](https://github.com/AspireSystemsUK/Method4.UmbracoMigrator.Source) package onto your source website, to generate the snapshots.
 
 ![Diagram showing a snapshot export from a va8 to v13 site](./docs/images/Snapshot_diagram.png)
 
@@ -92,7 +92,7 @@ The package will be updated as and when we need it, feel free to report any bugs
 Please see the [roadmap](./docs/ROADMAP.md) for a list of outstanding features and TODOs.
 
 ## 📝 License
-Copyright &copy; [Method4](https://www.method4.co.uk/).
+Copyright &copy; [Aspire Systems Digital Solutions Ltd](https://www.aspiresys.com/uk).
 
 All source code is licensed under the [Mozilla Public License](./LICENSE).
 

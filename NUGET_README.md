@@ -6,7 +6,7 @@
 
 Import Migration Snapshots created using the Method4.UmbracoMigrator.Source package.
 
-![A screenshot of the backoffice dashboard](https://raw.githubusercontent.com/Method4Ltd/Method4.UmbracoMigrator.Target/v13/main/docs/images/backofficedashboard.png)
+![A screenshot of the backoffice dashboard](https://raw.githubusercontent.com/AspireSystemsUK/Method4.UmbracoMigrator.Target/v13/main/docs/images/backofficedashboard.png)
 
 ## Features
 - Repeatable imports
@@ -29,13 +29,13 @@ Import Migration Snapshots created using the Method4.UmbracoMigrator.Source pack
 | v13             | v13.x           |
 
 ## Links
-- Repo: https://github.com/Method4Ltd/Method4.UmbracoMigrator.Target
-- Docs: https://github.com/Method4Ltd/Method4.UmbracoMigrator.Target/blob/v13/main/docs/README.md
+- Repo: https://github.com/AspireSystemsUK/Method4.UmbracoMigrator.Target
+- Docs: https://github.com/AspireSystemsUK/Method4.UmbracoMigrator.Target/blob/v13/main/docs/README.md
 
 ## Roadmap
-Please see the [roadmap](https://github.com/Method4Ltd/Method4.UmbracoMigrator.Target/blob/v13/main/docs/ROADMAP.md) for a list of outstanding features and TODOs.
+Please see the [roadmap](https://github.com/AspireSystemsUK/Method4.UmbracoMigrator.Target/blob/v13/main/docs/ROADMAP.md) for a list of outstanding features and TODOs.
 
 ## License
 Copyright &copy; [Method4](https://www.method4.co.uk/).
 
-All source code is licensed under the [Mozilla Public License](https://github.com/Method4Ltd/Method4.UmbracoMigrator.Target/blob/v13/main/LICENSE).
+All source code is licensed under the [Mozilla Public License](https://github.com/AspireSystemsUK/Method4.UmbracoMigrator.Target/blob/v13/main/LICENSE).

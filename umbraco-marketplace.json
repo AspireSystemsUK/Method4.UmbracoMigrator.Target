@@ -1,17 +1,17 @@
 {
     "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json",
     "AuthorDetails": {
-      "Name": "Method4",
-      "Description": "We’re development people. We build smart and brilliant software solutions",
-      "Url": "https://www.method4.co.uk/",
-      "ImageUrl": "https://github.com/Method4Ltd.png",
+      "Name": "Aspire Systems UK",
+      "Description": "We’re development people. We build smart and brilliant software solutions, and make it look super easy.",
+      "Url": "https://www.aspiresys.com/uk",
+      "ImageUrl": "https://github.com/AspireSystemsUK.png",
       "SyncContributorsFromRepository": true
     },
     "Category": "Developer Tools",
     "Description": "Import Migration Snapshots created using the Method4.UmbracoMigrator.Source package.",
-    "DocumentationUrl": "https://github.com/Method4Ltd/Method4.UmbracoMigrator.Target/blob/v13/main/docs",
+    "DocumentationUrl": "https://github.com/AspireSystemsUK/Method4.UmbracoMigrator.Target/blob/v13/main/docs",
     "LicenseTypes": [ "Free" ],
-    "IssueTrackerUrl": "https://github.com/Method4Ltd/Method4.UmbracoMigrator.Target/issues",
+    "IssueTrackerUrl": "https://github.com/AspireSystemsUK/Method4.UmbracoMigrator.Target/issues",
     "PackageType": "Package",
     "RelatedPackages": [
       {
@@ -21,7 +21,7 @@
     ],
     "Screenshots": [
       {
-        "ImageUrl": "https://raw.githubusercontent.com/Method4Ltd/Method4.UmbracoMigrator.Target/v13/main/docs/images/backofficedashboard.png",
+        "ImageUrl": "https://raw.githubusercontent.com/AspireSystemsUK/Method4.UmbracoMigrator.Target/v13/main/docs/images/backofficedashboard.png",
         "Caption": "The backoffice dashboard"
       }
     ],
