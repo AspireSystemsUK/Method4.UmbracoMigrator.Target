@@ -145,7 +145,7 @@ This service is for interacting with the `MigrationLookups` database table, this
      - Deletes all NodeRelation records from the `MigrationLookups` table
 
 ## 🖼️ What about my Media Files?
-On the [Method4.UmbracoMigrator.Source](https://github.com/Method4Ltd/Method4.UmbracoMigrator.Source) package, you can choose to include the physical media files in the migration snapshot, these would then be uploaded to your site's media folder (or Azure blob storage if configured) during a migration import.
+On the [Method4.UmbracoMigrator.Source](https://github.com/AspireSystemsUK/Method4.UmbracoMigrator.Source) package, you can choose to include the physical media files in the migration snapshot, these would then be uploaded to your site's media folder (or Azure blob storage if configured) during a migration import.
 
 > **Note:** If you have a large amount of media files, this process can be very slow. 
 > <br />Thereore we recommend manually copying your media files across. (e.g. using Azure Storage Explorer)
@@ -157,7 +157,7 @@ This is due to the fact that the default Umbraco _IMediaPathScheme_ implementati
 
 > You can read Owain's blog, which goes into this issue in further detail, here: https://owainjones.dev/blog/how-a-custom-imediapathscheme-came-to-the-rescue-for-our-migrated-media/
 
-As a workaround, this package includes a custom implementation of _IMediaPathScheme_ ([MigratedUrlRedirectMediaPathScheme.cs](https://github.com/Method4Ltd/Method4.UmbracoMigrator.Target/blob/v10/main/src/Method4.UmbracoMigrator.Target.Core/MediaPathSchemes/MigratedUrlRedirectMediaPathScheme.cs)), which extends the default _UniqueMediaPathScheme.cs_, and auto-creates a [Skybrud Redirects](https://marketplace.umbraco.com/package/skybrud.umbraco.redirects) redirect in the event that an in-place file replacement is performed on one of the migrated media nodes.
+As a workaround, this package includes a custom implementation of _IMediaPathScheme_ ([MigratedUrlRedirectMediaPathScheme.cs](https://github.com/AspireSystemsUK/Method4.UmbracoMigrator.Target/blob/v13/main/src/Method4.UmbracoMigrator.Target.Core/MediaPathSchemes/MigratedUrlRedirectMediaPathScheme.cs)), which extends the default _UniqueMediaPathScheme.cs_, and auto-creates a [Skybrud Redirects](https://marketplace.umbraco.com/package/skybrud.umbraco.redirects) redirect in the event that an in-place file replacement is performed on one of the migrated media nodes.
 
 >**Note:** The [Skybrud Redirects](https://marketplace.umbraco.com/package/skybrud.umbraco.redirects) package will need to be installed for this to work.
 
