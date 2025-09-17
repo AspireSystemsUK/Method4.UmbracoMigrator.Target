@@ -1,4 +1,5 @@
-﻿using Method4.UmbracoMigrator.Target.Core.Models.MigrationModels;
+﻿using Method4.UmbracoMigrator.Target.Core.Models.DataModels;
+using Method4.UmbracoMigrator.Target.Core.Models.MigrationModels;
 
 namespace Method4.UmbracoMigrator.Target.Core.MigrationSteps.Tasks;
 
@@ -8,5 +9,5 @@ public interface IContentStructureTask
     /// Imports and saves the migration nodes, into the content tree, but without any property data
     /// </summary>
     /// <param name="nodesToMigrate"></param>
-    void CreateContentNodeStructure(List<MigrationContent> nodesToMigrate);
+    void CreateContentNodeStructure(List<MigrationContent> nodesToMigrate, ImportSettings settings);
 }

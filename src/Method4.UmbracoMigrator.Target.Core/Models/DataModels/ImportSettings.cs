@@ -4,6 +4,7 @@
     {
         public bool DontPublishAfterImport { get; set; }
         public bool OverwriteExistingValues { get; set; }
+        public bool PreserveOldKeys { get; set; }
         public bool DisableDefaultMappers { get; set; }
         public bool CleanImport { get; set; }
         public string? ChosenSnapshotName { get; set; }

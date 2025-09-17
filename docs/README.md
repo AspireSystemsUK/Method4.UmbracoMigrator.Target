@@ -13,9 +13,11 @@ The dashboard can be found on the tree in the `Settings` section.
      - Nodes will not be published after a migration import
 - Overwrite if the node/property already exists
      - If a node already exists and a property, that should be mapped, already has a value; then we will overwrite that value.
-- Disable Default Mappers
+- Preserve old keys
+     - Preserves the old Content and Media Keys (GUIDs) when importing
+- Disable default mappers
      - The built-in default mappers automatically map any property that has an identical alias, this will disable that.
-- Clean Import
+- Clean import
      - This will delete all content, and media and wipe the migrator key relations table before importing.
 
 ## 🔎 Migrated Relations Lookup

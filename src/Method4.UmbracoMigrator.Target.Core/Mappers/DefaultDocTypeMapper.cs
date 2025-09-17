@@ -43,14 +43,14 @@ namespace Method4.UmbracoMigrator.Target.Core.Mappers
             return contentTypeMatch;
         }
 
-        public IContent CreateNode(MigrationContent oldNode, string contentTypeAlias, Guid parentKey)
+        public IContent CreateNode(MigrationContent oldNode, string contentTypeAlias, Guid parentKey, bool preserveOldKey)
         {
-            return CreateNewNode(oldNode, contentTypeAlias, parentKey);
+            return CreateNewNode(oldNode, contentTypeAlias, parentKey, preserveOldKey);
         }
 
-        public IContent CreateRootNode(MigrationContent oldNode, string contentTypeAlias)
+        public IContent CreateRootNode(MigrationContent oldNode, string contentTypeAlias, bool preserveOldKey)
         {
-            return CreateNewNode(oldNode, contentTypeAlias, null);
+            return CreateNewNode(oldNode, contentTypeAlias, null, preserveOldKey);
         }
 
         public IContent MapNode(MigrationContent oldNode, IContent newNode, bool overwriteExistingValues)
@@ -205,7 +205,7 @@ namespace Method4.UmbracoMigrator.Target.Core.Mappers
             return newNode;
         }
 
-        private IContent CreateNewNode(MigrationContent oldNode, string contentTypeAlias, Guid? parentKey)
+        private IContent CreateNewNode(MigrationContent oldNode, string contentTypeAlias, Guid? parentKey, bool preserveOldKey)
         {
             var nodeName = oldNode.Trashed
                 ? oldNode.Name.Truncate(250, "") // Truncate to make sure we don't have max length (255) issues with Umbraco appending '(n)' numbers to the name if a non trashed duplicate exists
@@ -216,6 +216,10 @@ namespace Method4.UmbracoMigrator.Target.Core.Mappers
                 : _contentService.Create(nodeName, (Guid)parentKey, contentTypeAlias);
 
             newNode.SortOrder = oldNode.SortOrder;
+
+            if (preserveOldKey) { 
+                newNode.Key = oldNode.Key;
+            }
 
             // Save default Name or variant names
             var contentType = _contentTypeService.Get(contentTypeAlias);

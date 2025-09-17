@@ -63,8 +63,8 @@ namespace Method4.UmbracoMigrator.Target.Core.MigrationSteps
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            _contentStructureTask.CreateContentNodeStructure(_contentNodesToMigrate);
-            _mediaStructureTask.CreateMediaNodeStructure(_mediaNodesToMigrate);
+            _contentStructureTask.CreateContentNodeStructure(_contentNodesToMigrate, _settings);
+            _mediaStructureTask.CreateMediaNodeStructure(_mediaNodesToMigrate, _settings);
 
             MoveTempNodes();
 

@@ -11,6 +11,7 @@
         vm.settings = {
             DontPublishAfterImport: false,
             OverwriteExistingValues: true,
+            PreserveOldKeys: true,
             DisableAutoMapping: false,
             CleanImport: false,
             ChosenSnapshotName: null,

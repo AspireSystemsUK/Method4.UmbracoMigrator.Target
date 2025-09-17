@@ -1,6 +1,7 @@
 ﻿using Method4.UmbracoMigrator.Target.Core.Extensions;
 using Method4.UmbracoMigrator.Target.Core.Hubs;
 using Method4.UmbracoMigrator.Target.Core.Mappers;
+using Method4.UmbracoMigrator.Target.Core.Models.DataModels;
 using Method4.UmbracoMigrator.Target.Core.Models.MigrationModels;
 using Method4.UmbracoMigrator.Target.Core.Services;
 using Microsoft.AspNetCore.SignalR;
@@ -25,7 +26,7 @@ namespace Method4.UmbracoMigrator.Target.Core.MigrationSteps.Tasks
         private readonly HubService _hubService = new(hubContext);
 
         /// <inheritdoc />
-        public void CreateMediaNodeStructure(List<MigrationMedia> nodesToMigrate)
+        public void CreateMediaNodeStructure(List<MigrationMedia> nodesToMigrate, ImportSettings settings)
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -74,7 +75,7 @@ namespace Method4.UmbracoMigrator.Target.Core.MigrationSteps.Tasks
                     {
                         // 916724a5-173d-4619-b97e-b9de133dd6f5 is the GUID of the Umbraco Master Root - https://github.com/umbraco/Umbraco-CMS/blob/d8b0616434d1114d0628fb5702206bea39baa88b/src/Umbraco.Infrastructure/Migrations/Install/DatabaseDataCreator.cs#L178
                         // Trashed items can have this as it's parent key
-                        newNode = defaultMediaTypeMapper.CreateRootNode(oldNode, contentType);
+                        newNode = defaultMediaTypeMapper.CreateRootNode(oldNode, contentType, settings.PreserveOldKeys);
                     }
                     else
                     {
@@ -84,17 +85,17 @@ namespace Method4.UmbracoMigrator.Target.Core.MigrationSteps.Tasks
 
                             // Add as a child to the temp node, if we haven't yet migrated it's parent
                             logger.LogWarning("Lookup for key '{parentKey}' Not found, '{oldKey}' will be added to the temp media node.", oldNode.ParentKey, oldNode.Key);
-                            newNode = AddToTempParentNode(oldNode, contentType);
+                            newNode = AddToTempParentNode(oldNode, contentType, settings);
                         }
                         else
                         {
-                            newNode = defaultMediaTypeMapper.CreateNode(oldNode, contentType, parentRelation.NewKeyAsGuid);
+                            newNode = defaultMediaTypeMapper.CreateNode(oldNode, contentType, parentRelation.NewKeyAsGuid, settings.PreserveOldKeys);
                         }
                     }
                 }
                 else
                 {
-                    newNode = defaultMediaTypeMapper.CreateRootNode(oldNode, contentType);
+                    newNode = defaultMediaTypeMapper.CreateRootNode(oldNode, contentType, settings.PreserveOldKeys);
                 }
 
                 // Save
@@ -140,12 +141,12 @@ namespace Method4.UmbracoMigrator.Target.Core.MigrationSteps.Tasks
             return mediaNode != null;
         }
 
-        private IMedia AddToTempParentNode(MigrationMedia oldNode, string contentType)
+        private IMedia AddToTempParentNode(MigrationMedia oldNode, string contentType, ImportSettings settings)
         {
             _hubService.SendMessage(1, $"Saving '{oldNode.Key}' under temp node");
             logger.LogWarning("Saving '{oldKey}' under temp node", oldNode.Key);
             var tempParent = GetOrCreateTempParentMediaNode();
-            return defaultMediaTypeMapper.CreateNode(oldNode, contentType, tempParent.Key);
+            return defaultMediaTypeMapper.CreateNode(oldNode, contentType, tempParent.Key, settings.PreserveOldKeys);
         }
 
         private IMedia GetOrCreateTempParentMediaNode()
