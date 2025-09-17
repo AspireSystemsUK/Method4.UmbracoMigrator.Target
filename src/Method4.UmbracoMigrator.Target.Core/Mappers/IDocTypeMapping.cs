@@ -5,8 +5,8 @@ namespace Method4.UmbracoMigrator.Target.Core.Mappers
 {
     public interface IInternalDocTypeMapping : IBaseMapping<MigrationContent, IContent>
     {
-        IContent CreateNode(MigrationContent oldNode, string contentTypeAlias, Guid parentKey);
-        IContent CreateRootNode(MigrationContent oldNode, string contentTypeAlias);
+        IContent CreateNode(MigrationContent oldNode, string contentTypeAlias, Guid parentKey, bool preserveOldKey);
+        IContent CreateRootNode(MigrationContent oldNode, string contentTypeAlias, bool preserveOldKey);
     }
 
     public interface IDocTypeMapping : IBaseMapping<MigrationContent, IContent>

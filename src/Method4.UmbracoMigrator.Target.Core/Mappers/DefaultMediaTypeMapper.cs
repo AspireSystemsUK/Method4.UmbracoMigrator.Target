@@ -32,14 +32,14 @@ namespace Method4.UmbracoMigrator.Target.Core.Mappers
             return contentTypeMatch;
         }
 
-        public IMedia CreateNode(MigrationMedia oldNode, string contentTypeAlias, Guid parentKey)
+        public IMedia CreateNode(MigrationMedia oldNode, string contentTypeAlias, Guid parentKey, bool preserveOldKey)
         {
-            return CreateNewNode(oldNode, contentTypeAlias, parentKey);
+            return CreateNewNode(oldNode, contentTypeAlias, parentKey, preserveOldKey);
         }
 
-        public IMedia CreateRootNode(MigrationMedia oldNode, string contentTypeAlias)
+        public IMedia CreateRootNode(MigrationMedia oldNode, string contentTypeAlias, bool preserveOldKey)
         {
-            return CreateNewNode(oldNode, contentTypeAlias, null);
+            return CreateNewNode(oldNode, contentTypeAlias, null, preserveOldKey);
         }
 
         public IMedia MapNode(MigrationMedia oldNode, IMedia newNode, bool overwriteExistingValues)
@@ -93,7 +93,7 @@ namespace Method4.UmbracoMigrator.Target.Core.Mappers
             return newNode;
         }
 
-        private IMedia CreateNewNode(MigrationMedia oldNode, string contentTypeAlias, Guid? parentKey)
+        private IMedia CreateNewNode(MigrationMedia oldNode, string contentTypeAlias, Guid? parentKey, bool preserveOldKey)
         {
             var nodeName = oldNode.Trashed
                 ? oldNode.Name.Truncate(250, "") // Truncate to make sure we don't have max length (255) issues with Umbraco appending '(n)' numbers to the name if a non trashed duplicate exists
@@ -102,6 +102,11 @@ namespace Method4.UmbracoMigrator.Target.Core.Mappers
             var newNode = parentKey == null ?
                 _mediaService.CreateMedia(nodeName, -1, contentTypeAlias)
                 : _mediaService.CreateMedia(nodeName, (Guid)parentKey, contentTypeAlias);
+
+            if (preserveOldKey)
+            {
+                newNode.Key = oldNode.Key;
+            }
 
             newNode.SortOrder = oldNode.SortOrder;
             return newNode;

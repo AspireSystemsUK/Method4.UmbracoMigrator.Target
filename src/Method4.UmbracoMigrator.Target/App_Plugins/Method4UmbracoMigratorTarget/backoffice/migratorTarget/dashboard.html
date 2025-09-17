@@ -21,6 +21,14 @@
                             label-position="right">
                 </umb-toggle>
                 <umb-toggle class="settings-container__setting"
+                            checked="vm.settings.PreserveOldKeys"
+                            on-click="vm.toggleSetting('PreserveOldKeys')"
+                            show-labels="true"
+                            label-on="Preserve old keys"
+                            label-off="Preserve old keys"
+                            label-position="right">
+                </umb-toggle>
+                <umb-toggle class="settings-container__setting"
                             checked="vm.settings.DisableDefaultMappers"
                             on-click="vm.toggleSetting('DisableDefaultMappers')"
                             show-labels="true"
