@@ -65,6 +65,10 @@ MediaPicker (legacy) can be converted to the new MediPicker 3's format automatic
     <td>v13</td>
     <td>v13.x</td>
   </tr>
+  <tr>
+    <td>v16</td>
+    <td>v16.x</td>
+  </tr>
 </table>
 
 ### NuGet package repository
@@ -81,7 +85,7 @@ Documentation can be found in the `/docs` folder, and there are examples of cust
 ### How do I create a migration snapshot?
 You will need to install the [Method4.UmbracoMigrator.Source](https://github.com/AspireSystemsUK/Method4.UmbracoMigrator.Source) package onto your source website, to generate the snapshots.
 
-![Diagram showing a snapshot export from a va8 to v13 site](./docs/images/Snapshot_diagram.png)
+![Diagram showing a snapshot export from a v8 to v13 site](./docs/images/Snapshot_diagram.png)
 
 ## ❤️ Support
 This package was originally created as an internal tool for us at Method4, to make migrating our client's Umbraco sites easy, and we've decided to make it available as an open-source package; as we believe other devs in the Umbraco community may find it useful too.
